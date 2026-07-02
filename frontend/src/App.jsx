@@ -1,16 +1,25 @@
 
 import "./App.css";
+import Hero from "./Components/Hero";
+import Result from "./Components/Result";
+import Footer from "./Components/Footer";
+import AnalyzeButton from "./Components/AnalyzeButton";
+import JobDescription from "./Components/JobDescription";
+import ResumeUpload from "./Components/Resumeanalyzer";
 
 function App(){
   return(
-    <div>
-      <h1>Resume Analyzer AI</h1>
-      <p>Upload your resume and compare it with a job description using AI</p>
-      <button>Analyze Resume
+  <>
+   <Hero />
+    <ResumeUpload />
+    <JobDescription />
+    <AnalyzeButton />
+    <Footer />
 
+</>
         
-      </button>
-    </div>
+      
+ 
   );
 }
 
