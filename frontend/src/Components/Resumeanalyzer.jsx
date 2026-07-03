@@ -1,4 +1,8 @@
-function ResumeUpload() {
+function ResumeUpload({selectedFile , setSelectedFile}) {
+ const handleFileChange=(event)=>{
+      const file = event.target.files[0];
+      setSelectedFile(file);
+ };
   return (
     <section className="upload-section">
       <div className="upload-card">
@@ -12,7 +16,11 @@ function ResumeUpload() {
         <input
           type="file"
           accept=".pdf"
+          onChange={handleFileChange}
         />
+        {selectedFile && (
+          <p>Selected File : {selectedFile.name}</p>
+        )}
 
       </div>
     </section>

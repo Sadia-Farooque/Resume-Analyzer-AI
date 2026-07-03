@@ -1,4 +1,7 @@
-function JobDescription() {
+function JobDescription({jobDescription , setJobDescription}) {
+  const handleJobDescriptionChange = (event) =>{
+    setJobDescription(event.target.value);
+  };
   return (
     <section className="job-section">
       <div className="job-card">
@@ -12,6 +15,8 @@ function JobDescription() {
         <textarea
           placeholder="Paste the complete job description here..."
           rows="10"
+          value ={jobDescription}
+          onChange={handleJobDescriptionChange}
         ></textarea>
 
       </div>
