@@ -1,6 +1,7 @@
 
 import "./App.css";
 import {useState} from "react";
+import Loading from "./Components/Loading";
 import Hero from "./Components/Hero";
 import Result from "./Components/Result";
 import Footer from "./Components/Footer";
@@ -13,6 +14,9 @@ function App(){
   const [jobDescription , setJobDescription] = useState("");
   const [loading , setLoading]= useState(false);
   const [showResult , setShowResult]= useState(false);
+  if (loading) {
+    return <Loading />;
+}
   return(
   <>
    <Hero />
@@ -23,7 +27,13 @@ function App(){
     <JobDescription 
     jobDescription={jobDescription}
     setJobDescription={setJobDescription}/>
-    <AnalyzeButton />
+    <AnalyzeButton 
+    selectedFile={selectedFile}
+    jobDescription={jobDescription}
+    setLoading={setLoading}
+    setShowResult={setShowResult}
+    />
+    {showResult && <Result />}
     <Footer />
 
 </>
