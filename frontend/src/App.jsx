@@ -15,8 +15,13 @@ function App(){
   const [loading , setLoading]= useState(false);
   const [showResult , setShowResult]= useState(false);
   if (loading) {
-    return <Loading />;
-}
+    return (
+      <Loading
+        setLoading={setLoading}
+        setShowResults={setShowResult}
+      />
+    );
+  }
   return(
   <>
    <Hero />

@@ -410,10 +410,10 @@ footer p strong {
 }
 
 .progress-fill{
-  width: 70%;
+  
   height: 100%;
   background: linear-gradient(90deg, #00ff00, #00d000);
-  animation: fillProgress 5s ease-in-out forwards;
+  transition: width 0.1s linear;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.8), inset 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
@@ -461,4 +461,12 @@ footer p strong {
   border: 1px solid rgba(255, 107, 107, 0.3);
   border-radius: 8px;
   animation: fadeInDown 0.5s ease-out;
+}
+
+.progress-text {
+  font-size: 1.2rem;
+  color: #00ff00;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: center;
 }
