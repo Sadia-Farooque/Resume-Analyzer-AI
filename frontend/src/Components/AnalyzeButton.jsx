@@ -1,17 +1,22 @@
+import { useState } from "react";
+
 function AnalyzeButton({
   selectedFile, jobDescription, setLoading, setShowResult,
 }) {
+  const [error, setError] = useState("");
+
   const handleAnalyze = () => {
     if (!selectedFile) {
-      alert("Please upload your resume.");
+      setError("Please upload your resume.");
       return;
     }
 
     if (!jobDescription.trim()) {
-      alert("Please enter a job description.");
+      setError("Please enter a job description.");
       return;
     }
 
+    setError("");
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -24,6 +29,7 @@ function AnalyzeButton({
       <button className="analyze-btn" onClick={handleAnalyze}>
         Analyze Resume
       </button>
+      {error && <p className="error-message">{error}</p>}
     </section>
   );
 }
