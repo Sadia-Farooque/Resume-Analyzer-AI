@@ -1,14 +1,14 @@
 
 import "./App.css";
-import {useState} from "react";
-import { testBackend } from "./services/resumeAnalysisService";
-import Loading from "./Components/Loading";
-import Hero from "./Components/Hero";
-import Result from "./Components/Result";
-import Footer from "./Components/Footer";
-import AnalyzeButton from "./Components/AnalyzeButton";
-import JobDescription from "./Components/JobDescription";
-import ResumeUpload from "./Components/ResumeUpload";
+import { useState } from "react";
+import Loading from "./components/Loading";
+import { analyzeResume } from "./services/resumeAnalysisService";
+import Hero from "./components/Hero";
+import Result from "./components/Result";
+import Footer from "./components/Footer";
+import AnalyzeButton from "./components/AnalyzeButton";
+import JobDescription from "./components/JobDescription";
+import ResumeUpload from "./components/ResumeUpload";
 function App(){
   const [selectedFile, setSelectedFile]= useState(null);
   const [jobDescription , setJobDescription] = useState("");
@@ -18,7 +18,10 @@ const handleAnalyze = async () => {
   setLoading(true);
 
   try {
-    const data = await testBackend();
+    const data = await analyzeResume(
+      selectedFile,
+      jobDescription
+    );
 
     console.log(data);
 
@@ -27,7 +30,6 @@ const handleAnalyze = async () => {
 
   } catch (error) {
     console.error(error);
-
     setLoading(false);
   }
 };

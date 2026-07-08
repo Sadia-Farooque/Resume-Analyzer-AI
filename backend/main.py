@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, UploadFile, File, Form
+
 
 app = FastAPI()
 
@@ -25,4 +27,14 @@ def home():
 def hello():
     return {
         "message": "Hello from FastAPI!"
+    }
+
+@app.post("/analyze")
+async def analyze_resume(
+    resume: UploadFile = File(...),
+    job_description: str = Form(...)
+):
+    return {
+        "filename": resume.filename,
+        "job_description": job_description
     }
