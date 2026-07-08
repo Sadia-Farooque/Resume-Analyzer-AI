@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 function AnalyzeButton({
-  selectedFile, jobDescription, setLoading, setShowResult,
-}) {
+  selectedFile,
+  jobDescription,
+  onAnalyze,
+}){
   const [error, setError] = useState("");
 
   const handleAnalyze = () => {
@@ -16,12 +18,8 @@ function AnalyzeButton({
       return;
     }
 
-    setError("");
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setShowResult(true);
-    }, 5000);
+ setError("");
+onAnalyze();
   };
 
   return (

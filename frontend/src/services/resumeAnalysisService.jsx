@@ -1,30 +1,11 @@
-function ResumeUpload({selectedFile , setSelectedFile}) {
- const handleFileChange=(event)=>{
-      const file = event.target.files[0];
-      setSelectedFile(file);
- };
-  return (
-    <section className="upload-section">
-      <div className="upload-card">
+const API_URL = "http://127.0.0.1:8000";
 
-        <h2>Upload Your Resume</h2>
+export async function testBackend() {
+  const response = await fetch(`${API_URL}/hello`);
 
-        <p>
-          Upload your resume in PDF format to begin the analysis.
-        </p>
+  if (!response.ok) {
+    throw new Error("Failed to connect to backend");
+  }
 
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={handleFileChange}
-        />
-        {selectedFile && (
-          <p>Selected File : {selectedFile.name}</p>
-        )}
-
-      </div>
-    </section>
-  );
+  return await response.json();
 }
-
-export default ResumeUpload;
