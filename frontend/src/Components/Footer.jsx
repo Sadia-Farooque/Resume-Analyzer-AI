@@ -1,7 +1,7 @@
-function Footer(){
-    return(
+function Footer() {
+    return (
         <footer>
-            <p>&copy; 2024 Resume Analyzer AI. All rights reserved by <strong>Sadia Fatima</strong></p>
+            <p>&copy; 2026 Resume Analyzer AI. All rights reserved by <strong>Sadia Fatima</strong></p>
         </footer>
     );
 }

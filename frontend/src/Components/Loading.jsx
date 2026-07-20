@@ -44,13 +44,14 @@ function Loading({ setLoading, setShowResults }) {
     <div className="loading-container">
       <div className="loading-background"></div>
 
-      <div className="loading-content">
+      <div className="loading-card">
+        <div className="loading-badge">Resume Intelligence</div>
         <div className="spinner"></div>
 
-        <h1>Analyzing Your Resume</h1>
+        <h1>Preparing Your Analysis</h1>
 
         <p className="loading-subtitle">
-          Please wait while our AI reviews your resume...
+          We are reviewing your resume against the target role and building a recruiter-ready assessment.
         </p>
 
         <div className="progress-bar">
