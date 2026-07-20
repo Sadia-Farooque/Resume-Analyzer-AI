@@ -1,6 +1,7 @@
 
 import "./App.css";
 import { useState } from "react";
+import { useMemo } from "react";
 import { jsPDF } from "jspdf";
 import Loading from "./components/Loading";
 import { analyzeResume } from "./services/resumeAnalysisService";
@@ -18,6 +19,9 @@ function App() {
   const [showResult, setShowResult] = useState(false);
   const [analysis, setAnalysis] = useState(null);
   const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   const handleAnalyze = async () => {
     setLoading(true);
@@ -119,6 +123,35 @@ function App() {
     doc.save("resume-analysis-report.pdf");
   };
 
+  const handleFeedbackSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!feedback.trim() || !name.trim()) {
+      return;
+    }
+
+    try {
+      await fetch("https://formspree.io/f/xjkvnqzk", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          message: feedback,
+          source: "Resume Analyzer AI",
+        }),
+      });
+      setName("");
+      setFeedback("");
+      setFeedbackSent(true);
+      setTimeout(() => setFeedbackSent(false), 3000);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <Loading setLoading={setLoading} setShowResults={setShowResult} />;
   }
@@ -140,6 +173,27 @@ function App() {
               Download Report
             </button>
           </div>
+
+          <form className="feedback-form" onSubmit={handleFeedbackSubmit}>
+            <div className="feedback-form-header">
+              <h3>Share your experience</h3>
+              <p>Tell us what worked well, what felt confusing, or what suggestions you want to send.</p>
+            </div>
+            <input
+              type="text"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Your name"
+            />
+            <textarea
+              value={feedback}
+              onChange={(event) => setFeedback(event.target.value)}
+              placeholder="Share your experience, suggestions, or any notes here..."
+              rows="4"
+            />
+            <button type="submit" className="primary-btn">Send Feedback</button>
+            {feedbackSent && <p className="feedback-success">Thanks — your feedback has been recorded.</p>}
+          </form>
         </section>
         <Footer />
       </>

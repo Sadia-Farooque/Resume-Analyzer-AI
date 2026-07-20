@@ -58,6 +58,36 @@ def _extract_keywords(text):
     return matches
 
 
+def build_rewrite_example(resume_line):
+    cleaned = (resume_line or "").strip()
+    if not cleaned:
+        return {"before": "Added measurable impact to your bullet points.", "after": "Delivered a scalable feature that improved reliability and reduced manual effort by 30%."}
+
+    lowered = cleaned.lower()
+    if "react" in lowered and "python" in lowered:
+        return {
+            "before": cleaned,
+            "after": "Built and shipped a React-based product experience with Python services, improving reliability, usability, and delivery speed.",
+        }
+
+    if "python" in lowered:
+        return {
+            "before": cleaned,
+            "after": "Developed Python-based solutions that automated workflows, improved system reliability, and reduced manual effort.",
+        }
+
+    if "team" in lowered or "lead" in lowered:
+        return {
+            "before": cleaned,
+            "after": "Led cross-functional delivery efforts, aligned stakeholders, and improved execution quality across critical initiatives.",
+        }
+
+    return {
+        "before": cleaned,
+        "after": "Delivered measurable outcomes by combining strong execution, clear ownership, and business-focused problem solving.",
+    }
+
+
 def build_fallback_analysis(resume_text, job_description):
     resume_keywords = _extract_keywords(resume_text)
     job_keywords = _extract_keywords(job_description)
@@ -74,6 +104,8 @@ def build_fallback_analysis(resume_text, job_description):
     resume_score = min(95, max(50, 65 + (len(resume_keywords) * 2)))
     overall_rating = round((ats_score + resume_score) / 2)
     job_match_percentage = min(95, max(40, overall_rating - 5 + (1 if len(matching_keywords) >= 2 else 0)))
+
+    rewrite_example = build_rewrite_example((resume_text or "").split(".")[0])
 
     return {
         "ats_score": ats_score,
@@ -191,7 +223,8 @@ def build_fallback_analysis(resume_text, job_description):
         },
         "resume_rewrite": {
             "summary": "Results-focused professional with strong technical foundations and a clear interest in delivering business value.",
-            "bullet_example": "Built and optimized scalable applications using Python, FastAPI, and React to improve delivery speed and reliability.",
+            "bullet_example": rewrite_example["after"],
+            "example": rewrite_example,
         },
     }
 

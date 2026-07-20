@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import fitz
+import requests
 from ai_service import analyze_resume
 
 app = FastAPI()
@@ -22,6 +23,23 @@ def home():
 @app.get("/hello")
 def hello():
     return {"message": "Hello from FastAPI!"}
+
+
+@app.post("/feedback")
+async def feedback(message: str = Form(...)):
+    if not message.strip():
+        raise HTTPException(status_code=400, detail="Feedback cannot be empty.")
+
+    try:
+        requests.post(
+            "https://formspree.io/f/xjkvnqzk",
+            data={"message": message, "source": "Resume Analyzer AI"},
+            timeout=20,
+        )
+    except Exception:
+        pass
+
+    return {"message": "Feedback received"}
 
 
 @app.post("/analyze")

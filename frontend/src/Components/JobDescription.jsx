@@ -14,7 +14,7 @@ function JobDescription({jobDescription , setJobDescription}) {
 
         <textarea
           placeholder="Paste the complete job description here..."
-          rows="10"
+          rows="6"
           value ={jobDescription}
           onChange={handleJobDescriptionChange}
         ></textarea>

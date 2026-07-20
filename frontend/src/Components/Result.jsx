@@ -56,6 +56,16 @@ function Result({ analysis }) {
           </ul>
         </article>
 
+        <article className="result-card wide-card">
+          <h3>Rewrite Example</h3>
+          <div className="rewrite-example">
+            <p><strong>Before:</strong> Some bullets lack measurable impact.</p>
+            <p><strong>After:</strong> Delivered measurable outcomes by improving performance, reducing manual effort, and strengthening execution quality.</p>
+            <p><strong>Before:</strong> A few missing role-specific keywords.</p>
+            <p><strong>After:</strong> Added role-relevant terminology such as Python, React, and API integration to better align with the target position.</p>
+          </div>
+        </article>
+
         <article className="result-card">
           <h3>Weaknesses</h3>
           <ul className="detail-list">
