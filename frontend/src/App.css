@@ -281,6 +281,106 @@ footer p strong {
   color: #00ff00;
   font-weight: 600;
 }
+
+.results-section {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 40px 24px 60px;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.results-header h2 {
+  color: #00ff00;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.results-header p {
+  color: #cbd5e1;
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.score-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 255, 0, 0.25);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.score-label {
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+
+.score-card strong {
+  color: #00ff00;
+  font-size: 1.7rem;
+}
+
+.score-card small {
+  font-size: 0.95rem;
+  color: #f8fafc;
+  margin-left: 6px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.result-card h3 {
+  color: #00ff00;
+  margin-bottom: 12px;
+}
+
+.result-card ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.result-card li {
+  background: rgba(0, 255, 0, 0.12);
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #f8fafc;
+}
+
+.wide-card {
+  grid-column: span 2;
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-top: 10px;
+  text-align: center;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

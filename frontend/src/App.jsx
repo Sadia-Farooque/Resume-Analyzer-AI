@@ -9,60 +9,46 @@ import Footer from "./components/Footer";
 import AnalyzeButton from "./components/AnalyzeButton";
 import JobDescription from "./components/JobDescription";
 import ResumeUpload from "./components/ResumeUpload";
-function App(){
-  const [selectedFile, setSelectedFile]= useState(null);
-  const [jobDescription , setJobDescription] = useState("");
-  const [loading , setLoading]= useState(false);
-  const [showResult , setShowResult]= useState(false);
-const handleAnalyze = async () => {
-  setLoading(true);
 
-  try {
-    const data = await analyzeResume(
-      selectedFile,
-      jobDescription
-    );
+function App() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [jobDescription, setJobDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [analysis, setAnalysis] = useState(null);
+  const [error, setError] = useState("");
 
-    console.log(data);
+  const handleAnalyze = async () => {
+    setLoading(true);
+    setError("");
+    setShowResult(false);
 
-    setLoading(false);
-    setShowResult(true);
+    try {
+      const data = await analyzeResume(selectedFile, jobDescription);
+      setAnalysis(data);
+      setShowResult(true);
+    } catch (err) {
+      console.error(err);
+      setError("Analysis failed. Please try again with a valid PDF and job description.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  } catch (error) {
-    console.error(error);
-    setLoading(false);
-  }
-};
   if (loading) {
-    return (
-      <Loading
-        setLoading={setLoading}
-        setShowResults={setShowResult}
-      />
-    );
+    return <Loading setLoading={setLoading} setShowResults={setShowResult} />;
   }
-  return(
-  <>
-   <Hero />
-    <ResumeUpload 
-    selectedFile={selectedFile}
-    setSelectedFile={setSelectedFile}
-    />
-    <JobDescription 
-    jobDescription={jobDescription}
-    setJobDescription={setJobDescription}/>
-    <AnalyzeButton 
-    selectedFile={selectedFile}
-    jobDescription={jobDescription}
-  onAnalyze={handleAnalyze}
-    />
-    {showResult && <Result />}
-    <Footer />
 
-</>
-        
-      
- 
+  return (
+    <>
+      <Hero />
+      <ResumeUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
+      <JobDescription jobDescription={jobDescription} setJobDescription={setJobDescription} />
+      <AnalyzeButton selectedFile={selectedFile} jobDescription={jobDescription} onAnalyze={handleAnalyze} />
+      {error && <p className="error-message">{error}</p>}
+      {showResult && <Result analysis={analysis} />}
+      <Footer />
+    </>
   );
 }
 
