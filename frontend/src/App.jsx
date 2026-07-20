@@ -35,8 +35,32 @@ function App() {
     }
   };
 
+  const handleStartOver = () => {
+    setShowResult(false);
+    setAnalysis(null);
+    setError("");
+  };
+
   if (loading) {
     return <Loading setLoading={setLoading} setShowResults={setShowResult} />;
+  }
+
+  if (showResult) {
+    return (
+      <>
+        <section className="results-page">
+          <div className="results-page-header">
+            <h1>Resume Analysis Ready</h1>
+            <p>Your AI-powered review is now displayed on its own results page.</p>
+            <button className="secondary-btn" onClick={handleStartOver}>
+              Analyze Another Resume
+            </button>
+          </div>
+          <Result analysis={analysis} />
+        </section>
+        <Footer />
+      </>
+    );
   }
 
   return (
@@ -46,7 +70,6 @@ function App() {
       <JobDescription jobDescription={jobDescription} setJobDescription={setJobDescription} />
       <AnalyzeButton selectedFile={selectedFile} jobDescription={jobDescription} onAnalyze={handleAnalyze} />
       {error && <p className="error-message">{error}</p>}
-      {showResult && <Result analysis={analysis} />}
       <Footer />
     </>
   );
